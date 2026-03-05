@@ -27,24 +27,49 @@ submitForm.addEventListener("submit",(e)=>{
     e.preventDefault();
     
     let valueName=inputName.value;
-    let valuePrice=inputPrice.value;
+    let valuePrice=Number(inputPrice.value);
     let newProduct= {
         id:Date.now(),
         name: valueName,
         price: valuePrice
     };
-
+    
     let itemProduct=document.createElement("li");
     itemProduct.className="product-item";
-    itemProduct.innerHTML=`${newProduct.name}-${newProduct.price}`;
+    itemProduct.innerHTML=`${newProduct.name}-${newProduct.price.toLocaleString("vi-VN")}`;
+
+//bài 3
+    let deleteButton= document.createElement("button");
+    deleteButton.className="delete-btn";
+    deleteButton.innerText="Delete";
+    itemProduct.appendChild(deleteButton);
+    deleteButton.addEventListener("click",()=>{
+        let check=confirm("Bạn có chắc muốn xóa sản phẩm này?");
+        if (check) {
+            itemProduct.remove();
+        }
+    });
+
+    // bài 4
+    let updateButton=document.createElement("button");
+    updateButton.className="edit-price-btn";
+    updateButton.innerText="Sửa giá";
+    itemProduct.appendChild(updateButton);
+    updateButton.addEventListener("click",()=>{
+        let newPrice=+prompt("Nhập giá mới (VND):");
+        valuePrice=newPrice.toLocaleString("vi-VN");
+    })
 
     productsList.appendChild(itemProduct);
     inputName.value="";
     inputPrice.value="";
 });
 
-//Bài 3
-itemProduct.innerHTML=
+
+
+
+
+
 
 
 
